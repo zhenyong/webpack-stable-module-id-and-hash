@@ -2,6 +2,26 @@
 
 To provide stable module id and reliable content chunkhash in webpack 1.x, help u make long term cache easily.
 
+## Usage
+
+
+```
+npm install webpack-stable-module-id-and-hash --save-dev
+
+```
+
+Then new a plugin in `plugins` webpack options, only use it in **`Production`** stage build，use OccurrenceOrderPlugin for `Development` is enough.
+
+```
+var WebpackStableModuleIdAndHash = require('webpack-stable-module-id-and-hash');
+...
+plugins: [
+...
+new WebpackStableModuleIdAndHash()
+...
+]
+```
+
 ## Why
 
 Here related discuss from github issue
