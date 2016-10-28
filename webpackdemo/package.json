@@ -1,0 +1,36 @@
+{
+  "name": "webpackdemo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "0.js",
+  "dependencies": {
+    "css-loader": "^0.21.0",
+    "decamelize": "^1.1.1",
+    "icss-replace-symbols": "^1.0.2",
+    "defined": "^1.0.0",
+    "postcss-svgo": "^2.0.4",
+    "postcss-reduce-transforms": "^1.0.3",
+    "postcss-discard-comments": "^2.0.2",
+    "style-loader": "^0.13.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.0.0",
+    "babel-eslint": "^7.0.0",
+    "babel-loader": "^6.0.0",
+    "babel-plugin-add-module-exports": "^0.2.1",
+    "babel-plugin-component": "^0.4.3",
+    "babel-plugin-lodash": "^3.2.9",
+    "babel-plugin-transform-runtime": "^6.0.0",
+    "babel-preset-es2015": "^6.0.0",
+    "babel-preset-stage-2": "^6.0.0",
+    "babel-register": "^6.0.0",
+    "extract-text-webpack-plugin": "^1.0.1",
+    "webpack": "^1.13.3"
+  },
+  "scripts": {
+    "build": "rm -rf build/** && webpack",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
