@@ -72,7 +72,7 @@ WebpackStableModuleIdAndHash.prototype.apply = function(compiler) {
         compilation.plugin("chunk-hash", function(chunk, chunkHash) {
             var source = chunk.modules.sort(compareMod).map(getModSrc).join('');
             chunkHash.digest = function() {
-                return md5(source);
+                return seed + '-' + md5(source);
             };
         });
     });
