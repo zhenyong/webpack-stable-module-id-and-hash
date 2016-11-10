@@ -20,17 +20,10 @@ function getModSrc(module) {
     return module._source && module._source._value || '';
 }
 
-function hexToNum(str) {
-    str = str.toUpperCase();
-    var code = ''
-    for (var i = 0, len = str.length; i < len; i++) {
-        var c = str.charCodeAt(i) + '';
-        if ((c + '').length < 2) {
-            c = '0' + c
-        }
-        code += c
-    }
-    return parseInt(code, 10);
+function hashToModuleId(hash, seed) {
+    // Generate a 28 bit integer using a part of the MD5 hash.
+    // Seed is a number 0..31 and the hash is 32 chars (nibbles) long.
+    return parseInt((hash + hash).substr(seed, 7), 16);
 }
 
 
@@ -42,15 +35,15 @@ WebpackStableModuleIdAndHash.prototype.apply = function(compiler) {
 
     var usedIds = {};
     var context = compiler.options.context;
+    var seed = (+this.options.seed || 0) % 32;
 
     function genModuleId(modulePath) {
-        var id = md5(modulePath);
-        var len = 4;
-        while (usedIds[id.substr(0, len)]) {
-            len++;
-        }
-        id = id.substr(0, len);
-        return hexToNum(id)
+        var hash = md5(modulePath);
+        // generatew a 28 bit integer using a part of the MD5 hash
+        var id = hashToModuleId(hash, seed);
+        if (usedIds[id])
+          throw new Error("webpack-stable-module-id-and-hash module id collision");
+        return id
     }
 
     // Generate module id by md5 value of file path.
@@ -79,7 +72,7 @@ WebpackStableModuleIdAndHash.prototype.apply = function(compiler) {
         compilation.plugin("chunk-hash", function(chunk, chunkHash) {
             var source = chunk.modules.sort(compareMod).map(getModSrc).join('');
             chunkHash.digest = function() {
-                return md5(source);
+                return seed + '-' + md5(source);
             };
         });
     });
