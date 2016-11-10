@@ -46,7 +46,7 @@ Since module id is not stable, `webpack-md5-hash` sort modules by id may lead so
 ### Stable Module Id
 
 Here some option or plugins support by webpack 1.x, like [OccurrenceOrderPlugin](http://webpack.github.io/docs/list-of-plugins.html#occurrenceorderplugin), [`recordsPath`](http://webpack.github.io/docs/configuration.html#recordspath-recordsinputpath-recordsoutputpath), [DllPlugin & DllReferencePlugin
-](http://webpack.github.io/docs/list-of-plugins.html#dllplugin)，they all try to give stable module id，but can not 100% fix problem.
+](http://webpack.github.io/docs/list-of-plugins.html#dllplugin)，they all try to give stable module id，but can not 100% fix problem or require you to check in extra files.
 
 Webpack 2 may fix most part of them with [HashedModuleIdsPlugin](https://github.com/webpack/webpack/blob/master/lib/HashedModuleIdsPlugin.js)
 
