@@ -21,24 +21,25 @@ function getModSrc(module) {
 }
 
 function hashToModuleId(hash, seed, hashSize) {
-    // Generate a 28 bit integer using a part of the MD5 hash.
-    // Seed is a number 0..31 and the hash is 32 chars (nibbles) long.
+    // Generate a unsigned integer sized <hashSize> bits using a part of the MD5
+    // hash. Seed is a number 0..31 and the hash is expected to be 32 chars
+    // (nibbles) long.
 
     // double the hash to allow overflow
     hash = hash + hash;
 
-    // get lower and upper 32 bits
-    var lsb = parseInt(hash.substr(seed, 8), 16);
-    var msb = parseInt(hash.substr(seed + 8, 8), 16);
+    // get lower and upper 28 bits
+    var lsb = parseInt(hash.substr(seed, 7), 16);
+    var msb = parseInt(hash.substr(seed + 7, 7), 16);
 
     // combine them to get the ID
     // NOTE: Logical operators only work up to 31 bits (because values will be
     // casted to 32bit signed integer), so we use classic arithmetic!
-    var lsbBits = Math.min(31, hashSize);
-    var msbBits = Math.max(0, hashSize - 31);
+    var lsbBits = Math.min(28, hashSize);
+    var msbBits = Math.max(0, hashSize - 28);
     var lsbMask = Math.pow(2, lsbBits) - 1;
     var msbMask = Math.pow(2, msbBits) - 1;
-    return (lsb & lsbMask) + ((msb & msbMask) * Math.pow(2, 31));
+    return (lsb & lsbMask) + ((msb & msbMask) * Math.pow(2, 28));
 }
 
 
