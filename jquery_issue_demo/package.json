@@ -1,0 +1,17 @@
+{
+  "name": "jquery_issue_demo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "webpack.config.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "expose-loader": "^0.7.1",
+    "jquery": "^3.1.1",
+    "webpack": "^1.13.3"
+  }
+}
