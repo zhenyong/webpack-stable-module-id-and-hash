@@ -53,3 +53,30 @@ Webpack 2 may fix most part of them with [HashedModuleIdsPlugin](https://github.
 Like what HashedModuleIdsPlugin to do, juse one more thing that it converts the hash to num because webpack 1.x just accept num as module id.
 
 OMG!! Forgive my poor English. Just checkout the source code.
+
+### Module ID collisions may cause builds to fail
+
+This plugin calculates a predictable hash values based on the module file 
+names. A hashin algorithm based on MD5 is used to calculate the hash value. 
+As with any hash value, collisions are rare, but possible. In the event of a 
+collision, a `webpack-stable-module-id-and-hash module id collision` error is
+thrown during the Webpack build.
+  
+In such a situation you can try to choose a different `seed` value to get 
+different module IDs that may not collide.
+   
+The probability of a collision depends on the `hashSize` option. By default 
+53 bits are used, which allow 9007199254740992 possible module IDs. This means 
+that the probability of a collision is 0.0000000000000011102% multiplied by 
+the number of modules in your project.
+
+### Options
+
+The plugin acceps an object with these optional properties:
+ 
+- `hashSize` = Number of bits to use for the module ID. Defaults to the 
+maximum, 53 bits. Large hash sizes greatly reduce the probability of a 
+collision but lead also to very large module ID numbers for the generated 
+code, which might *slightly* incrase Webpack chunk sizes.
+- `seed` = Any number between 0 and 31. Different "seed" values cause 
+completely different module IDs. This is useful in the event of a collision. 
