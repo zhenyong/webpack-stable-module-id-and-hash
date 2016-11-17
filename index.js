@@ -62,7 +62,7 @@ WebpackStableModuleIdAndHash.prototype.apply = function(compiler) {
 
     function genModuleId(modulePath) {
         var hash = md5(modulePath);
-        // generatew a 28 bit integer using a part of the MD5 hash
+        // generate a 28 bit integer using a part of the MD5 hash
         var id = hashToModuleId(hash, seed, hashSize);
         if (usedIds[id])
           throw new Error("webpack-stable-module-id-and-hash module id collision");
@@ -71,7 +71,7 @@ WebpackStableModuleIdAndHash.prototype.apply = function(compiler) {
 
     // Generate module id by md5 value of file path.
 
-    // Since webpack 1.x can not use non-number as module id,
+    // Since webpack 1.x can not use a non-number as a module id,
     // convert the md5 (hex) to unique number.
 
     // spooned from https://github.com/webpack/webpack/blob/master/lib/HashedModuleIdsPlugin.js
