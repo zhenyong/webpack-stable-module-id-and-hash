@@ -1,6 +1,6 @@
 {
   "name": "webpack-stable-module-id-and-hash",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "To provide stable module id and reliable content chunkhash",
   "main": "index.js",
   "scripts": {
