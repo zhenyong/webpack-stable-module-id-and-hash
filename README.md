@@ -70,6 +70,31 @@ The probability of a collision depends on the `hashSize` option. By default
 that the probability of a collision is 0.0000000000000011102% multiplied by 
 the number of modules in your project.
 
+### chunk-hash length
+
+This plugin adds the values of `hashSize` and `seed` to the chunk-hash string.
+That's necessary because these settings influence the module ids contained 
+within the chunks, but *not* the MD5 chunk hash itself. Therefore, the values 
+must become part of the chunk-hash used in the filename to make it unique.
+ 
+Webpack by default shortens the resulting hash string to 20 characters, reducing
+the entropy of the MD5 hash.
+
+In practice, that shouldn't be an issue. But if you want to have a better 
+hash then you can adjust the `output.hashDigestLength` Webpack setting to a 
+value higher than 20.
+
+For example, to compensate the reduced entropy caused by 
+`webpack-stable-module-id-and-hash` you might use a setting like this:
+
+```
+  //...
+  output: {
+    //...
+    hashDigestLength: 30
+  }
+```
+
 ### Options
 
 The plugin acceps an object with these optional properties:

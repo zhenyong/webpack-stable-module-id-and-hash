@@ -64,7 +64,7 @@ WebpackStableModuleIdAndHash.prototype.apply = function(compiler) {
         var hash = md5(modulePath);
         // generate a 28 bit integer using a part of the MD5 hash
         var id = hashToModuleId(hash, seed, hashSize);
-        if (usedIds[id] && usedIds[id] !== modulePath)
+        if (usedIds.hasOwnProperty(id) && usedIds[id] !== modulePath)
           throw new Error("webpack-stable-module-id-and-hash module id collision");
         return id
     }
@@ -95,7 +95,7 @@ WebpackStableModuleIdAndHash.prototype.apply = function(compiler) {
         compilation.plugin("chunk-hash", function(chunk, chunkHash) {
             var source = chunk.modules.sort(compareMod).map(getModSrc).join('');
             chunkHash.digest = function() {
-                return seed + '-' + md5(source);
+                return seed + '-' + hashSize + '-' + md5(source);
             };
         });
     });
