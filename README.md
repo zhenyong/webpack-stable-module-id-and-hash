@@ -1,3 +1,5 @@
+**NOTE:** Using this plugin with 'expose' plugin may cause problem. [2 modules gets the same ID with expose-loader · Issue #12 · zhenyong/webpack-stable-module-id-and-hash](https://github.com/zhenyong/webpack-stable-module-id-and-hash/issues/12)
+
 # WebpackStableModuleIdAndHash
 
 To provide stable module id and reliable content chunkhash in webpack 1.x, help u make long term cache easily.
