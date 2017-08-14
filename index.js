@@ -61,6 +61,12 @@ WebpackStableModuleIdAndHash.prototype.apply = function(compiler) {
     }
 
     function genModuleId(modulePath) {
+        // remove node modules version and loader querys
+        // because querys may contains local path.
+        modulePath = modulePath.split('!').map(function(i){
+            return i.replace(/\/(\.\d+)+?@/g, '/@').replace(/\?.*?$/i, '');
+        }).join('!');
+
         var hash = md5(modulePath);
         // generate a 28 bit integer using a part of the MD5 hash
         var id = hashToModuleId(hash, seed, hashSize);
